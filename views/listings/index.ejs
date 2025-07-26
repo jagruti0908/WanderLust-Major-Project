@@ -1,0 +1,186 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    #filters {
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: center;
+        /* gap: 1.5rem; */
+        padding: 1rem 0;
+        background-color: white;
+        font-size: 0.9rem;
+        justify-content: space-between !important;
+    }
+
+    .filter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .filter p {
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        margin-bottom: 0;
+    }
+
+    .tax-toggle {
+        border: 1px solid black;
+        border-radius: 1rem;
+        padding: 0.3rem 0.8rem 0.3rem 0.8rem !important;
+        display: flex;
+        align-items: center;
+        height: 2.5rem;
+    }
+
+    .tax-info {
+        display: none;
+    }
+
+    .navbar-custom {
+        background-color: white;
+        border-bottom: 1px solid #ccc;
+    }
+    .navbar {
+        background-color: white !important;
+    }
+    .form-check-label {
+        font-size: 0.8rem;
+    }
+</style>
+
+<!-- Filter Navbar -->
+
+<nav
+    class="navbar navbar-expand-lg bg-body-tertiary navbar2-custom"
+    style="background-color: white"
+>
+    <div class="container-fluid">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div
+                class="navbar-nav w-100 justify-content-start flex-wrap navbar-nav-scroll"
+                id="filters"
+            >
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p>Rooms</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Iconic Cities</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain"></i></div>
+                    <p>Mountains</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Castles</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p>Amazing Pools</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p>Camping</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-cow"></i></div>
+                    <p>Farms</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-snowflake"></i></div>
+                    <p>Arctic</p>
+                </div>
+
+                <div class="filter">
+                    <div><i class="fa-solid fa-ship"></i></div>
+                    <p>Boats</p>
+                </div>
+
+                <div class="tax-toggle ms-4">
+                    <div class="form-check form-switch form-check-reverse m-0">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="switchCheckDefault"
+                        />
+                        <label
+                            class="form-check-label ms-2"
+                            for="switchCheckDefault"
+                        >
+                            Display total taxes applied
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Listings -->
+
+<div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mt-3">
+    <%for(let listing of allListings){%>
+    <a href="/listings/<%=listing._id%>" class="listing-link">
+        <div class="card col listing-card">
+            <img
+                src="<%=listing.image.url%>"
+                class="card-img-top"
+                alt="listing_image"
+                style="height: 13rem"
+            />
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+                <p class="card-text">
+                    <b><%=listing.title%></b>
+                    <br />
+                    &#8377; <%= listing.price.toLocaleString("en-IN") %> per
+                    night
+                    <i class="tax-info">&nbsp; +18% GST</i>
+                </p>
+            </div>
+        </div>
+    </a>
+    <%}%>
+</div>
+
+<script>
+    let taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for (info of taxInfo) {
+            if (info.style.display != "inline") {
+                info.style.display = "inline";
+            } else {
+                info.style.display = "none";
+            }
+        }
+    });
+</script>
