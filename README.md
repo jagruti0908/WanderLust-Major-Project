@@ -41,4 +41,4 @@ Wanderlust is live here 👉 https://wanderlust-major-project01.onrender.com
 It may take some time to open or render the project...
 
 > Hosted on [Render](https://render.com)
-> 💡 You can try Wanderlust live [here] https://wanderlust-major-project01.onrender.com without installing it locally.
+> 💡 You can try Wanderlust live [https://wanderlust-major-project01.onrender.com] without installing it locally.
